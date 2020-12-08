@@ -27,7 +27,7 @@ push_filetype() {
 	filetypes_n=$(($filetypes_n+1))
 }
 
-default_filetypes="\.c|\.cpp"
+default_filetypes="c|\.cpp"
 filetypes=""
 filetypes_n=0
 tmp_file=""
@@ -46,10 +46,10 @@ done
 
 [[ -n $default_filetypes ]] && tmp_file=$default_filetypes && push_filetype
 
-#echo "filetypes not added to .gitignore: $filetypes"
+#echo $filetypes
 
-programs=$(ack main | egrep "$filetypes" | cut -d "." -f1)
-files=$(ack main | egrep "$filetypes" | cut -d ":" -f1)
+programs=$(ack "int main" | egrep "$filetypes" | cut -d "." -f1)
+files=$(ack "int main" | egrep "$filetypes" | cut -d ":" -f1)
 parray=($programs)
 farray=($files)
 
