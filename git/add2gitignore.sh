@@ -10,7 +10,7 @@ usage () {
 	------------------------------------
 	-h    Shows this help
 	-f    Adds filetype to the ones that are not added
-	-a    Not use default filetypes set [.c, .h, .cpp, .java, .py, .md, .sh, .gitignore]
+	-a    Not use default filetypes set [.c, .h, .cpp, .java, .py, .md, .sh, .am, .gitignore]
 	-d    Dry-run
 	-o    Defines output. Default uses .gitgnore
 HELP_USAGE
@@ -27,7 +27,7 @@ push_filetype() {
 	filetypes_n=$(($filetypes_n+1))
 }
 
-default_filetypes="\.c|\.h|\.cpp|\.java|\.py|\.md|\.sh|\.gitignore"
+default_filetypes="\.c|\.h|\.cpp|\.java|\.py|\.md|\.sh|\.am|\.gitignore"
 filetypes=""
 filetypes_n=0
 tmp_file=""
