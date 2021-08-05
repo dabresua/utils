@@ -1,0 +1,16 @@
+"*":
+  "better-git-blame":
+    searchInLayerEnabled: false
+  core:
+    telemetryConsent: "limited"
+  editor:
+    atomicSoftTabs: false
+    fontSize: 13
+    showInvisibles: true
+    softTabs: false
+    tabLength: 4
+    tabType: "hard"
+  "exception-reporting":
+    userId: "62f6dced-85c0-41fe-bf7f-241316b965e8"
+  welcome:
+    showOnStartup: false
