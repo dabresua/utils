@@ -16,7 +16,7 @@ usage() {
 	-t    Test connection and exit [default false]
 	-h    Shows this help
 
-    Example: $0 -f /home/VPN_files/vpn_configuration_file.ovpn -u https://gitlab.devotools.com/
+	Example: $0 -f /home/VPN_files/vpn_configuration_file.ovpn -u https://gitlab.devotools.com/
 
 HELP_USAGE
 exit 1
@@ -79,9 +79,9 @@ check=false
 timeout=10
 while getopts tochf:u:s: flag
 do
-	case "${flag}" in
-		h) usage;;
-		o) skip=true;;
+    case "${flag}" in
+        h) usage;;
+        o) skip=true;;
         t) check=true;;
         c) close && exit 0;;
         f) file=${OPTARG};;
