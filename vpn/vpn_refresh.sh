@@ -75,13 +75,14 @@ open() {
 
 # Main
 skip=false
+check=false
 timeout=10
 while getopts tochf:u:s: flag
 do
 	case "${flag}" in
 		h) usage;;
 		o) skip=true;;
-        t) check && exit 0;;
+        t) check=true;;
         c) close && exit 0;;
         f) file=${OPTARG};;
         u) url=${OPTARG};;
@@ -94,14 +95,20 @@ then
     usage
 fi
 
-if $skip
-then
+if $skip; then
+    echo "Opening without checking"
     open
+    exit 0
+fi
+
+if $check; then
+    echo "Only checking"
+    check
+    exit 0
+fi
+
+if check; then
+    echo "Nothing to do"
 else
-    if check
-    then
-        echo "Nothing to do"
-    else
-        open
-    fi
+    open
 fi
