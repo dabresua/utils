@@ -23,7 +23,7 @@ exit 1
 }
 
 check() {
-    ret=$(curl $url --connect-timeout 10)
+    ret=$(curl $url --connect-timeout $timeout)
     if [[ -z "$ret" ]]
     then
         echo "VPN is down :(" 
@@ -75,7 +75,8 @@ open() {
 
 # Main
 skip=false
-while getopts tochf:u: flag
+timeout=10
+while getopts tochf:u:s: flag
 do
 	case "${flag}" in
 		h) usage;;
@@ -84,6 +85,7 @@ do
         c) close && exit 0;;
         f) file=${OPTARG};;
         u) url=${OPTARG};;
+        s) timeout=${OPTARG};;
 	esac
 done
 
