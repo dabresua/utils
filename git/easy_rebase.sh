@@ -3,12 +3,14 @@
 usage() {
     cat <<EOM
     Util to cherry pick lot of commits from one branch to another
+
     -h: shows this help
     -o: orig branch
     -d: dest branch
-    -c: first commit (oldest) to cherry-pick
+    -c: commit from which start cherry-picking
     -v: verbose mode
-    Usage: $0
+
+    Usage: $0 -o branch_1 -d branch_2 -c 1685bc5b6380e3e0b9e99d53198ea30c76e7bb07
 EOM
     exit 0
 }
