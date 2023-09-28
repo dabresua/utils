@@ -16,26 +16,28 @@ exit 1
 clean_local() {
 	if [ $dry_run -gt 0 ];
 	then
-		non_added=$(git status -s | egrep "A |AM| M" | rev | cut -d" " -f1 | rev)
-		non_follow=$(git status -s | egrep "??" | rev | cut -d" " -f1 | rev)
+		non_added=$(git status -s | grep -E "A |AM| M" | rev | cut -d" " -f1 | rev)
+		non_follow=$(git status -s | grep -E "??" | rev | cut -d" " -f1 | rev)
 		echo "Will clean "
 		echo "$non_added"
 		echo "$non_follow"
 	else
 		git checkout .
-		non_follow=$(git status -s | egrep "??" | rev | cut -d" " -f1 | rev)
-		rm $non_follow
+		non_follow=$(git status -s | grep -E "??" | rev | cut -d" " -f1 | rev)
+        if [[ ! -z $non_follow ]]; then
+    		rm $non_follow
+        fi
 	fi
 }
 
 synch_local() {
 	if [ $dry_run -gt 0 ];
 	then
-		to_copy=$(git status -s | egrep "M|A|AM|??" | rev | cut -d" " -f1 | rev)
+		to_copy=$(git status -s | grep -E "M|A|AM|??" | rev | cut -d" " -f1 | rev)
 		echo "Will copy $to_copy"
 	else
-		to_copy=$(git status -s | egrep "M|A|AM|??" | rev | cut -d" " -f1 | rev)
-		cp --parents $to_copy $2
+		to_copy=$(git status -s | grep -E "M|A|AM|??" | rev | cut -d" " -f1 | rev)
+		cp --parents $to_copy $dest
 	fi
 }
 
