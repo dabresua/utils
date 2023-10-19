@@ -114,5 +114,6 @@ fi
 if check; then
     echo "Nothing to do"
 else
+    close
     open
 fi
