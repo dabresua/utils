@@ -36,13 +36,17 @@ check() {
 
 close() {
     echo "Closing the VPN session..."
-    OPENVPN3_SESSION_PATH=$(openvpn3 sessions-list | grep Path | cut -d':' -f2 | cut -d' ' -f2)
-    if [[ -z "${OPENVPN3_SESSION_PATH}" ]]; then
-        echo "Session path not found; Looks like you are disconnected"; 
-        openvpn3 sessions-list
-        exit 1
+    openvpn3 sessions-list
+    readarray -t OPENVPN3_SESSION_PATH < <(openvpn3 sessions-list | grep "Path" | cut -d':' -f2 | cut -d' ' -f2)
+    if [[ ${#OPENVPN3_SESSION_PATH[@]} -eq 0 ]]; then
+        echo "No opened sessions found"
+    else
+        for session_path in ${OPENVPN3_SESSION_PATH[@]}
+        do
+            echo "Closing session at $session_path"
+            openvpn3 session-manage --session-path $session_path --disconnect
+        done
     fi
-    openvpn3 session-manage --session-path $OPENVPN3_SESSION_PATH --disconnect
 }
 
 open() {
